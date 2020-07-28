@@ -20,6 +20,7 @@ body {
 }
 
 #pads {
+  background-color: mediumvioletred;
   width: 350px;
   height: 350px;
   display: flex;
