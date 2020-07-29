@@ -3,23 +3,34 @@ import './App.css';
 import DrumPads from './components/DrumPads';
 
 function App() {
+  // displays the name of the last audio played
   const [display, setDisplay] = useState('Have fun!');
 
   useEffect(() => {
+    // listen for keyboard use
     window.addEventListener('keydown', handleKeyPress);
   });
 
   const padClick = (event) => {
+    // identify the corresponding audio element's id 
     let currentPad = event.target.querySelector('audio').id;
+    // use the id variable to grab the audio tag and play audio
     document.getElementById(currentPad).play();
+    // display the name of the audio by accessing the target div's id
     setDisplay(event.target.id.replace(/_/g, ' '));
   };
 
   const handleKeyPress = (event) => {
+    // Gather array of acceptable key presses
     let keycodes = drumLibrary.map((a, i, arr) => arr[i].keycode);
+    // Check if keypress is within the acceptable array
     if (keycodes.includes(event.keyCode)) {
+      // If yes, identify the key pressed as a String
       let audioId = String.fromCharCode(event.keyCode);
+      // Grab the appropriate audio tag using the the above variable
+      // then play audio
       document.getElementById(audioId).play();
+      // display the name of the audio by accessing the id of the parent div
       setDisplay(
         document.getElementById(audioId).parentNode.id.replace(/_/g, ' ')
       );
