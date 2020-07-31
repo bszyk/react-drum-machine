@@ -11,92 +11,91 @@ function App() {
     window.addEventListener('keydown', handleKeyPress);
   });
 
-  const padClick = (event) => {
-    // identify the corresponding audio element's id 
-    let currentPad = event.target.querySelector('audio').id;
+  const padClick = (e) => {
+    // identify the corresponding audio element's id
+    let currentPad = e.target.firstChild.id;
     // use the id variable to grab the audio tag and play audio
     document.getElementById(currentPad).play();
     // display the name of the audio by accessing the target div's id
-    setDisplay(event.target.id.replace(/_/g, ' '));
+    setDisplay(e.target.id.replace(/_/g, ' '));
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (e) => {
     // Gather array of acceptable key presses
-    let keycodes = drumLibrary.map((a, i, arr) => arr[i].keycode);
+    let keycodes = drumLibrary.map((drumPad) => drumPad.keycode);
     // Check if keypress is within the acceptable array
-    if (keycodes.includes(event.keyCode)) {
+    if (keycodes.includes(e.keyCode)) {
       // If yes, identify the key pressed as a String
-      let audioId = String.fromCharCode(event.keyCode);
+      let audioId = String.fromCharCode(e.keyCode);
       // Grab the appropriate audio tag using the the above variable
+      let audio = document.getElementById(audioId);
       // then play audio
-      document.getElementById(audioId).play();
+      audio.play();
       // display the name of the audio by accessing the id of the parent div
-      setDisplay(
-        document.getElementById(audioId).parentNode.id.replace(/_/g, ' ')
-      );
+      setDisplay(audio.parentNode.id.replace(/_/g, ' '));
     }
   };
 
   return (
-    <div id='machine'>
-      <h1 id='title'>Drum Machine</h1>
-      <DrumPads drumLibrary={drumLibrary} play={padClick} />
-      <h3 id='display'>{display}</h3>
+    <div className='container'>
+      <h1 className='title'>Drum Machine</h1>
+      <DrumPads drumLibrary={drumLibrary} padClick={padClick} />
+      <h3 className='display'>{display}</h3>
     </div>
   );
 }
 
 const drumLibrary = [
   {
-    id: 'Chord_1',
+    sound: 'Chord_1',
     keypress: 'Q',
     keycode: 81,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3',
   },
   {
-    id: 'Chord_2',
+    sound: 'Chord_2',
     keypress: 'W',
     keycode: 87,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3',
   },
   {
-    id: 'Chord_3',
+    sound: 'Chord_3',
     keypress: 'E',
     keycode: 69,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3',
   },
   {
-    id: 'Dry_Ohh',
+    sound: 'Dry_Ohh',
     keypress: 'A',
     keycode: 65,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3',
   },
   {
-    id: 'Snare',
+    sound: 'Snare',
     keypress: 'S',
     keycode: 83,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3',
   },
   {
-    id: 'Scraper',
+    sound: 'Scraper',
     keypress: 'D',
     keycode: 68,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3',
   },
   {
-    id: 'Closed_Hi_Hat',
+    sound: 'Closed_Hi_Hat',
     keypress: 'Z',
     keycode: 90,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3',
   },
   {
-    id: 'Punchy_Kick',
+    sound: 'Punchy_Kick',
     keypress: 'X',
     keycode: 88,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3',
   },
   {
-    id: 'Side_Stick',
+    sound: 'Side_Stick',
     keypress: 'C',
     keycode: 67,
     src: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3',

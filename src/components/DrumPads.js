@@ -1,14 +1,20 @@
 import React from 'react';
+import DrumPad from './DrumPad';
 
-const DrumPads = (props) => {
-  const drums = props.drumLibrary.map((a, i, arr) => (
-    <div className='drum-pad' id={arr[i].id} onClick={props.play}>
-      <audio className='clip' id={arr[i].keypress} src={arr[i].src}></audio>
-      {arr[i].keypress}
+const DrumPads = ({ drumLibrary, padClick }) => {
+  return (
+    <div className='drum-pads'>
+      {drumLibrary.map((drumPad, i) => (
+        <DrumPad
+          key={i}
+          description={drumPad.sound}
+          padClick={padClick}
+          keypress={drumPad.keypress}
+          audioSrc={drumPad.src}
+        />
+      ))}
     </div>
-  ));
-
-  return <div id='pads'>{drums}</div>;
+  );
 };
 
 export default DrumPads;
