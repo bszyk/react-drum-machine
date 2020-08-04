@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className='container'>
-      <h1 className='title'>Drum Machine</h1>
+      <h1 className='title'>React Drum Machine</h1>
       <DrumPads drumLibrary={drumLibrary} padClick={padClick} />
       <h3 className='display'>{display}</h3>
     </div>
