@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:ital,wght@0,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap&family=Monoton&family=Montserrat:ital,wght@0,400;1,500&display=swap');
 
 :root {
   --pad-bg-color: #352921;
@@ -198,6 +198,20 @@ body {
 }
 
 .display {
-  align-self: flex-start;
+  grid-row: 3 / 4;
+  align-self: flex-end;
+
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: rebeccapurple;
+  text-shadow: 0px 0px 15px blueviolet;
+  letter-spacing: 5px;
   text-align: center;
+
+  background-color: #111;
+  padding: 5px 0;
+  border-radius: 1000000px;
+  border: 2px ridge #333;
+
+  margin-bottom: 30px;
 }

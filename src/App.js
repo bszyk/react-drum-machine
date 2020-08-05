@@ -4,7 +4,7 @@ import DrumPads from './components/DrumPads';
 
 function App() {
   // displays the name of the last audio played
-  const [display, setDisplay] = useState('Have fun!');
+  const [display, setDisplay] = useState('@B_SZYK');
 
   useEffect(() => {
     // listen for keyboard use
@@ -19,7 +19,7 @@ function App() {
     // display the name of the audio by accessing the target div's id
     let drumPadDiv = e.target;
     //
-    setDisplay(e.target.id.replace(/_/g, ' '));
+    setDisplay(e.target.id.replace(/_/g, ' ').toUpperCase());
 
     let circle = document.getElementById(`circle-${keypress}`);
     let colorClassNum = circle.dataset.color;
@@ -47,7 +47,7 @@ function App() {
       //
       let parentDiv = audio.parentNode;
       // display the name of the audio by accessing the id of the parent div
-      setDisplay(parentDiv.id.replace(/_/g, ' '));
+      setDisplay(parentDiv.id.replace(/_/g, ' ').toUpperCase());
 
       let circle = document.getElementById(`circle-${keypress}`);
       let colorClassNum = circle.dataset.color;
