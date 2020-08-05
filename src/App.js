@@ -13,11 +13,24 @@ function App() {
 
   const padClick = (e) => {
     // identify the corresponding audio element's id
-    let currentPad = e.target.firstChild.id;
+    let keypress = e.target.firstChild.id;
     // use the id variable to grab the audio tag and play audio
-    document.getElementById(currentPad).play();
+    document.getElementById(keypress).play();
     // display the name of the audio by accessing the target div's id
+    let drumPadDiv = e.target;
+    //
     setDisplay(e.target.id.replace(/_/g, ' '));
+
+    let circle = document.getElementById(`circle-${keypress}`);
+    let colorClassNum = circle.dataset.color;
+
+    circle.classList.add(colorClassNum);
+    drumPadDiv.classList.add(`drum-pad-border-${colorClassNum}`);
+
+    setTimeout(() => {
+      circle.classList.remove(circle.dataset.color);
+      drumPadDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
+    }, 200);
   };
 
   const handleKeyPress = (e) => {
@@ -26,13 +39,26 @@ function App() {
     // Check if keypress is within the acceptable array
     if (keycodes.includes(e.keyCode)) {
       // If yes, identify the key pressed as a String
-      let audioId = String.fromCharCode(e.keyCode);
+      let keypress = String.fromCharCode(e.keyCode);
       // Grab the appropriate audio tag using the the above variable
-      let audio = document.getElementById(audioId);
+      let audio = document.getElementById(keypress);
       // then play audio
       audio.play();
+      //
+      let parentDiv = audio.parentNode;
       // display the name of the audio by accessing the id of the parent div
-      setDisplay(audio.parentNode.id.replace(/_/g, ' '));
+      setDisplay(parentDiv.id.replace(/_/g, ' '));
+
+      let circle = document.getElementById(`circle-${keypress}`);
+      let colorClassNum = circle.dataset.color;
+
+      circle.classList.add(colorClassNum);
+      parentDiv.classList.add(`drum-pad-border-${colorClassNum}`);
+
+      setTimeout(() => {
+        circle.classList.remove(circle.dataset.color);
+        parentDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
+      }, 200);
     }
   };
 

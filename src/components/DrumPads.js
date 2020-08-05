@@ -11,6 +11,8 @@ const DrumPads = ({ drumLibrary, padClick }) => {
           padClick={padClick}
           keypress={drumPad.keypress}
           audioSrc={drumPad.src}
+          // determines pad color by index
+          color={i <= 2 ? 'color-1' : i >= 3 && i <= 5 ? 'color-2' : 'color-3'}
         />
       ))}
     </div>
