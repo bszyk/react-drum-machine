@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import DrumPads from './components/DrumPads';
+import drumLibrary from './data/drumLibrary';
 
 function App() {
   // displays the name of the last audio played
@@ -16,21 +17,12 @@ function App() {
     let keypress = e.target.firstChild.id;
     // use the id variable to grab the audio tag and play audio
     document.getElementById(keypress).play();
-    // display the name of the audio by accessing the target div's id
+    // set a variable for the target div
     let drumPadDiv = e.target;
-    //
-    setDisplay(e.target.id.replace(/_/g, ' ').toUpperCase());
-
-    let circle = document.getElementById(`circle-${keypress}`);
-    let colorClassNum = circle.dataset.color;
-
-    circle.classList.add(colorClassNum);
-    drumPadDiv.classList.add(`drum-pad-border-${colorClassNum}`);
-
-    setTimeout(() => {
-      circle.classList.remove(circle.dataset.color);
-      drumPadDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
-    }, 200);
+    // display the name of the audio by accessing the target div's id
+    setDisplay(drumPadDiv.id.replace(/_/g, ' ').toUpperCase());
+    // initiate pad animation
+    addPadAnimation(keypress, drumPadDiv);
   };
 
   const handleKeyPress = (e) => {
@@ -44,22 +36,29 @@ function App() {
       let audio = document.getElementById(keypress);
       // then play audio
       audio.play();
-      //
-      let parentDiv = audio.parentNode;
+      // set a variable for the parent div
+      let drumPadDiv = audio.parentNode;
       // display the name of the audio by accessing the id of the parent div
-      setDisplay(parentDiv.id.replace(/_/g, ' ').toUpperCase());
-
-      let circle = document.getElementById(`circle-${keypress}`);
-      let colorClassNum = circle.dataset.color;
-
-      circle.classList.add(colorClassNum);
-      parentDiv.classList.add(`drum-pad-border-${colorClassNum}`);
-
-      setTimeout(() => {
-        circle.classList.remove(circle.dataset.color);
-        parentDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
-      }, 200);
+      setDisplay(drumPadDiv.id.replace(/_/g, ' ').toUpperCase());
+      // initiate pad animation
+      addPadAnimation(keypress, drumPadDiv);
     }
+  };
+
+  const addPadAnimation = (keypress, drumPadDiv) => {
+    // access the associated div for circle animation
+    let circle = document.getElementById(`circle-${keypress}`);
+    // identify which color is associated with the circle div
+    let colorClassNum = circle.dataset.color;
+    // add appropriate class to circle div and animate circle
+    circle.classList.add(colorClassNum);
+    // also add associated color class to drum pad border
+    drumPadDiv.classList.add(`drum-pad-border-${colorClassNum}`);
+    // remove classess added above to complete animation effect
+    setTimeout(() => {
+      circle.classList.remove(circle.dataset.color);
+      drumPadDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
+    }, 200);
   };
 
   return (
@@ -70,62 +69,5 @@ function App() {
     </div>
   );
 }
-
-const drumLibrary = [
-  {
-    sound: 'Chord_1',
-    keypress: 'Q',
-    keycode: 81,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3',
-  },
-  {
-    sound: 'Chord_2',
-    keypress: 'W',
-    keycode: 87,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3',
-  },
-  {
-    sound: 'Chord_3',
-    keypress: 'E',
-    keycode: 69,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3',
-  },
-  {
-    sound: 'Dry_Ohh',
-    keypress: 'A',
-    keycode: 65,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3',
-  },
-  {
-    sound: 'Snare',
-    keypress: 'S',
-    keycode: 83,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3',
-  },
-  {
-    sound: 'Scraper',
-    keypress: 'D',
-    keycode: 68,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3',
-  },
-  {
-    sound: 'Closed_Hi_Hat',
-    keypress: 'Z',
-    keycode: 90,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3',
-  },
-  {
-    sound: 'Punchy_Kick',
-    keypress: 'X',
-    keycode: 88,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3',
-  },
-  {
-    sound: 'Side_Stick',
-    keypress: 'C',
-    keycode: 67,
-    src: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3',
-  },
-];
 
 export default App;
