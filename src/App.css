@@ -23,7 +23,6 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: white;
 
   background-color: #444;
   color: var(--font-color);
@@ -47,7 +46,7 @@ body {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr 1fr;
+  grid-template-rows: min-content repeat(4, 1fr);
   column-gap: 20px;
 
   padding: 20px;
@@ -67,8 +66,10 @@ body {
   text-align: center;
 }
 
+/**********************/
+/*       DRUMS        */
 .drum-pads {
-  grid-row: 2 / 4;
+  grid-row: 2 / -1;
   grid-column: 1 / 2;
 
   display: grid;
@@ -193,13 +194,61 @@ body {
 
 .drum-pad-key {
   font-size: 12px;
-
   padding-left: 2px;
 }
 
+/**********************/
+.bpm {
+  grid-row: 4 / 5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bpm .buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.bpm .buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20px;
+}
+
+.bpm .buttons button i {
+  font-size: 10px;
+
+  padding: 2px;
+}
+
+.bpm h3 {
+  font-size: 24px;
+
+  letter-spacing: 5px;
+}
+
+.bpm span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: rebeccapurple;
+  text-shadow: 0px 0px 15px blueviolet;
+  letter-spacing: 5px;
+  text-align: center;
+
+  background-color: #111;
+  padding: 5px 20px 5px 28px;
+  border-radius: 1000000px;
+  border: 2px ridge #333;
+
+  margin: 0 15px 0 10px;
+}
+
 .display {
-  grid-row: 3 / 4;
-  align-self: flex-end;
+  grid-row: 5 / 6;
 
   font-family: 'Orbitron', sans-serif;
   font-size: 24px;
@@ -212,6 +261,4 @@ body {
   padding: 5px 0;
   border-radius: 1000000px;
   border: 2px ridge #333;
-
-  margin-bottom: 30px;
 }

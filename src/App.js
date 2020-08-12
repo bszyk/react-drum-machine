@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import DrumPads from './components/DrumPads';
+import Bpm from './components/Bpm';
 import drumLibrary from './data/drumLibrary';
 
 function App() {
   // displays the name of the last audio played
   const [display, setDisplay] = useState('@B_SZYK');
+  // updates beats per minute used by metronome
+  const [bpm, setBpm] = useState(140);
 
   useEffect(() => {
     // listen for keyboard use
     window.addEventListener('keydown', handleKeyPress);
   });
-
-  const padClick = (e) => {
-    // identify the corresponding audio element's id
-    let keypress = e.target.firstChild.id;
-    // use the id variable to grab the audio tag and play audio
-    document.getElementById(keypress).play();
-    // set a variable for the target div
-    let drumPadDiv = e.target;
-    // display the name of the audio by accessing the target div's id
-    setDisplay(drumPadDiv.id.replace(/_/g, ' ').toUpperCase());
-    // initiate pad animation
-    addPadAnimation(keypress, drumPadDiv);
-  };
 
   const handleKeyPress = (e) => {
     // Gather array of acceptable key presses
@@ -43,6 +33,19 @@ function App() {
       // initiate pad animation
       addPadAnimation(keypress, drumPadDiv);
     }
+  };
+
+  const padClick = (e) => {
+    // identify the corresponding audio element's id
+    let keypress = e.target.firstChild.id;
+    // use the id variable to grab the audio tag and play audio
+    document.getElementById(keypress).play();
+    // set a variable for the target div
+    let drumPadDiv = e.target;
+    // display the name of the audio by accessing the target div's id
+    setDisplay(drumPadDiv.id.replace(/_/g, ' ').toUpperCase());
+    // initiate pad animation
+    addPadAnimation(keypress, drumPadDiv);
   };
 
   const addPadAnimation = (keypress, drumPadDiv) => {
@@ -65,6 +68,7 @@ function App() {
     <div className='container'>
       <h1 className='title'>React Drum Machine</h1>
       <DrumPads drumLibrary={drumLibrary} padClick={padClick} />
+      <Bpm bpm={bpm} setBpm={setBpm} />
       <h3 className='display'>{display}</h3>
     </div>
   );
