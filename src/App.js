@@ -10,27 +10,11 @@ function App() {
   const [display, setDisplay] = useState('@B_SZYK');
   // updates beats per minute used by metronome
   const [bpm, setBpm] = useState(140);
-  // determines whether or not metronome plays
-  const [metronome, setMetronome] = useState(false);
-  // set interval ID (to use clearInterval)
-  const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
     // listen for keyboard use
     window.addEventListener('keydown', handleKeyPress);
   });
-
-  useEffect(() => {
-    const interval = () => {
-      setInterval(() => {
-        document.getElementById('metronome').play();
-      }, 1000);
-    };
-    if (metronome) {
-      interval();
-      setIntervalId(interval);
-    }
-  }, [metronome, setIntervalId]);
 
   const handleKeyPress = (e) => {
     // Gather array of acceptable key presses
@@ -85,7 +69,7 @@ function App() {
     <div className='container'>
       <h1 className='title'>React Drum Machine</h1>
       <DrumPads drumLibrary={drumLibrary} padClick={padClick} />
-      <Metronome setMetronome={setMetronome} />
+      <Metronome bpm={bpm} />
       <Bpm bpm={bpm} setBpm={setBpm} />
       <h3 className='display'>{display}</h3>
     </div>

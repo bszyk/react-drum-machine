@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import metronomeWav from '../audio/metronome.wav';
 
-const Metronome = ({ setMetronome }) => {
+const Metronome = ({ bpm }) => {
+  const [metronome, setMetronome] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+
+  // milliseconds in a minute
+  // (60 seconds * 1000 = 60,000 )
+
+  useEffect(() => {
+    if (metronome) {
+      let interval = setInterval(() => {
+        document.getElementById('metronome').play();
+      }, 60000 / bpm);
+      setIntervalId(interval);
+    } else {
+      clearInterval(intervalId);
+    }
+  }, [metronome, intervalId, bpm]);
+
   return (
     <div className='metronome'>
       <h3>Metronome</h3>
