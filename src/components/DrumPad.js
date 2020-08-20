@@ -4,7 +4,7 @@ function DrumPad({ description, padClick, keypress, audioSrc, color }) {
   return (
     <div className='drum-pad-container'>
       <div className={`drum-pad ${color}`} id={description} onClick={padClick}>
-        <audio className='clip' id={keypress} src={audioSrc}></audio>
+        <audio id={keypress} src={audioSrc}></audio>
         <div
           className='drum-pad-circle'
           id={`circle-${keypress}`}
