@@ -3,13 +3,31 @@ import React from 'react';
 const Bpm = ({ bpm, setBpm }) => {
   return (
     <div className='bpm'>
-      <h3>BPM</h3>
-      <span>{bpm}</span>
+      <label htmlFor='bpm'>BPM</label>
+      <input
+        type='number'
+        id='bpm'
+        // removes leading 0 in display
+        value={bpm === 0 ? '' : bpm}
+        onChange={(e) =>
+          e.target.value >= 0 && e.target.value <= 300
+            ? setBpm(Number(e.target.value))
+            : null
+        }
+        min='1'
+        max='300'
+      />
       <div className='buttons'>
-        <button className='increase-bpm' onClick={() => setBpm(bpm + 1)}>
+        <button
+          className='increase-bpm'
+          onClick={() => (bpm >= 0 && bpm < 300 ? setBpm(bpm + 1) : null)}
+        >
           <i className='fas fa-arrow-up'></i>
         </button>
-        <button className='decrease-bpm' onClick={() => setBpm(bpm - 1)}>
+        <button
+          className='decrease-bpm'
+          onClick={() => (bpm > 0 && bpm <= 300 ? setBpm(bpm - 1) : null)}
+        >
           <i className='fas fa-arrow-down'></i>
         </button>
       </div>

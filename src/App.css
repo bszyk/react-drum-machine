@@ -212,6 +212,8 @@ body {
 }
 
 .bpm .buttons button {
+  cursor: pointer;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -221,17 +223,18 @@ body {
 
 .bpm .buttons button i {
   font-size: 10px;
-
   padding: 2px;
 }
 
-.bpm h3 {
+.bpm label {
   font-size: 24px;
-
+  font-weight: 600;
   letter-spacing: 5px;
 }
 
-.bpm span {
+.bpm input {
+  width: 100px;
+
   font-family: 'Orbitron', sans-serif;
   font-size: 24px;
   color: rebeccapurple;
@@ -245,6 +248,21 @@ body {
   border: 2px ridge #333;
 
   margin: 0 15px 0 10px;
+
+  /* remove default arrow buttons */
+  -moz-appearance: textfield;
+}
+
+/* remove default arrow buttons */
+.bpm input::-webkit-outer-spin-button,
+.bpm input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.bpm input:focus {
+  outline: none;
+  border: 2px ridge rebeccapurple;
+  box-shadow: 0px 0px 2px blueviolet;
 }
 
 /**********************/
