@@ -51,7 +51,7 @@ function App() {
     circle.classList.add(colorClassNum);
     drumPadDiv.classList.add(`drum-pad-border-${colorClassNum}`);
     setTimeout(() => {
-      circle.classList.remove(circle.dataset.color);
+      circle.classList.remove(colorClassNum);
       drumPadDiv.classList.remove(`drum-pad-border-${colorClassNum}`);
     }, 200);
   };
